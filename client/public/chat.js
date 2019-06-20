@@ -48,7 +48,7 @@ document.onkeyup = function(event) {
 		}
 		else {
 			//user sent a message, unfocus our chat form
-			chatInput.blur();
+			//chatInput.blur();
 		}
 	}
 }
