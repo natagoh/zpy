@@ -20,10 +20,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Static middleware
-app.use(express.static(path.join(__dirname, '..', 'public')));
+app.use(express.static(path.join(__dirname, '../client', 'public')));
 
 app.get('/*', (req, res, next) => {
-	res.sendFile(path.join(__dirname, '..', 'index.html'));
+	res.sendFile(path.join(__dirname, '../client', 'index.html'));
 });
 
 app.use((req, res, next) => {
