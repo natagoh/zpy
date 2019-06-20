@@ -13,6 +13,7 @@ const gameState = {
   players: {}
 }
 
+SOCKET_LIST = {};
 
 app.use(morgan('dev'));
 
@@ -39,10 +40,12 @@ app.use((err, req, res, next) => {
 
 io.on('connection', (socket) => {
 	console.log('a user connected:', socket.id);
+	SOCKET_LIST[socket.id] = socket;
 
 	socket.on('disconnect', function() {
 		console.log('user disconnected');
-		delete gameState.players[socket.id]
+		delete SOCKET_LIST[socket.id];
+		// delete gameState.players[socket.id]
 	});
 
 	// new player joining
@@ -54,6 +57,15 @@ io.on('connection', (socket) => {
 			height: 25
 		}
 	})
+
+	// send chat message to server
+    socket.on('sendMsgToServer',function(data) {
+        console.log('someone sent a message!');
+        for (var i in SOCKET_LIST) {
+        	SOCKET_LIST[i].emit('addToChat', data);
+        }
+      
+    });
 });
 
 setInterval(() => {
