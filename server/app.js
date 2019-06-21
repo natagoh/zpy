@@ -64,7 +64,6 @@ io.on('connection', (socket) => {
         for (var i in SOCKET_LIST) {
         	SOCKET_LIST[i].emit('addToChat', data);
         }
-      
     });
 });
 
