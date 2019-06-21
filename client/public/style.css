@@ -7,7 +7,7 @@ body{
     background:#455a64;
     width:60%;
     height:60%;
-    border-radius:6px;
+    border-radius:5px;
     margin: 5% auto auto auto;
     padding: 10px;
     text-align:center;
@@ -31,7 +31,10 @@ body{
     height:15%;
     margin:auto auto 1px auto;
 }
- 
+
+#chat-form {
+    /*display: none;*/
+}
 .btn{
     background:#2ecc71;
     height:30px;

@@ -9,12 +9,9 @@ var chatText = document.getElementById('chat-text');
 var chatInput = document.getElementById('chat-input');
 var chatForm = document.getElementById('chat-form');
 
-// whether user is typing or not
-var typing;
-
 //add a chat cell to our chat list view, and scroll to the bottom
 socket.on('addToChat',function(data) {           
-	console.log('got a chat message');
+	console.log('got a chat message:', data);
  	chatText.innerHTML += '<div class="chatCell">' + data + '</div>';
     chatText.scrollTop = chatText.scrollHeight;
               
@@ -35,48 +32,42 @@ chatForm.onsubmit = function(e) {
  
  
 document.addEventListener('DOMContentLoaded', function() {
-	// initially hide chatbar
-	chatForm.style.display = "none";
 	document.getElementById('chat-input').addEventListener('focus', function() {
-		typing = true;
+		console.log("chat input: ", chatInput.value);
 	});
 	document.getElementById('chat-input').addEventListener('blur', function() {
-		typing = false;
+		// typing = false;
 		// todo: hide chat bar
 		chatForm.style.display = "none";
 	});
 });
 
 
-// document.onkeyup = function(event) {
-// 	//user pressed and released enter key
-// 	if (event.keyCode === 13) {
-// 		if (!typing) {
-// 			//user is not already typing, focus our chat text form
-// 			chatInput.focus();
-// 		} else {
-// 			//user sent a message, unfocus our chat form
-// 			//chatInput.blur();
-// 		}
-// 	}
-// }
-
-// document.addEventListener('keydown', event => {
-//         const key = event.key.toLowerCase();
-//         console.log(key);
-// });
-
 document.onkeydown = function(event) {
-	// t key
-	if (event.keyCode === 84) {
-		// if user isn;t already typing, show the chat bar
-		console.log("special key pressed!");
-		if (!typing) {
-			console.log("show chat bar");
-			// todo: show chat bar and focus
+	event = event || window.event;
+	if (chatForm.style.display == "none") {
+		// t key
+		if (event.keyCode === 84) {
+			// if user isn;t already typing, show the chat bart
+			// don't let the 't' how up in chat
+			event.preventDefault();
+			chatForm.style.display = "block";
+			chatInput.value = '';
+			chatInput.focus();
+		}
+		// slash key (/) for secret commands ;)))
+		else if (event.keyCode === 191) {
 			chatForm.style.display = "block";
 			chatInput.focus();
 		}
 	}
+
+	// esc key 
+	else if (event.keyCode === 27 && chatForm.style.display != "none") {
+		chatForm.style.display = "none";
+		// leave focus
+		chatInput.blur();
+	}
+	
 }
 
