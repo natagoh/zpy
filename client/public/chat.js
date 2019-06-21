@@ -5,15 +5,17 @@ socket.emit('newPlayer');
 
 
 // get html elements
-var chatText = document.getElementById('chat-text');
+var chatBox = document.getElementById('chat-box');
 var chatInput = document.getElementById('chat-input');
 var chatForm = document.getElementById('chat-form');
 
 //add a chat cell to our chat list view, and scroll to the bottom
 socket.on('addToChat',function(data) {           
 	console.log('got a chat message:', data);
- 	chatText.innerHTML += '<div class="chatCell">' + data + '</div>';
-    chatText.scrollTop = chatText.scrollHeight;
+ 	chatBox.innerHTML += '<div class="chatLine">' +
+ 	' <span class="chatUsername">' + "Natasha:" + '</span>' + '<div class="chatText">' + data + '</div>'
+ 	+ '</div>';
+    chatBox.scrollTop = chatText.scrollHeight;
               
 });
     
@@ -36,14 +38,12 @@ document.addEventListener('DOMContentLoaded', function() {
 		console.log("chat input: ", chatInput.value);
 	});
 	document.getElementById('chat-input').addEventListener('blur', function() {
-		// typing = false;
-		// todo: hide chat bar
-		chatForm.style.display = "none";
+		// removes focus from chatBar
 	});
 });
 
 let showChat = () => {
-	chatForm.style.display = "block";
+	chatForm.style.display = "flex";
 	chatInput.focus();
 }
 
@@ -68,7 +68,6 @@ document.onkeydown = function(event) {
 	else if (event.keyCode === 191 && !chatVisible) {
 		showChat();
 	}
-
 	// esc key 
 	else if (event.keyCode === 27 && chatVisible) {
 		hideChat();
