@@ -1,5 +1,8 @@
 body {
     background: #102027;
+    min-height: 100vh;
+    max-width: 100vw;
+    position: relative;
 }
  
  
@@ -17,7 +20,7 @@ body {
 
 #chat-box {
     background: #62727b;
-    width:100%;
+    width:60%;
     height:200px;
     padding: 5px;
     /*margin-bottom: 5%;*/
@@ -50,6 +53,8 @@ body {
 
 #chat-form {
     width: 100%;
+    position: absolute;
+    bottom: 0;
     /*display: flex;*/
 }
 
@@ -57,10 +62,16 @@ body {
 #chat-input {
     height: 30px;
     width: 100%;
-    padding: 0px 5px;
+    padding: 0 5px;
     border: none;
     background: #37474f;
     color: white;
+
+    /*fix padding issues*/
+    box-sizing:border-box;  /** add this **/
+    -moz-box-sizing:border-box; /** add this **/
+    -webkit-box-sizing:border-box; /** add this **/
+    -ms-box-sizing:border-box; /** add this **/
     /*font-size: 16px;*/
 }
 
