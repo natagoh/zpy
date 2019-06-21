@@ -50,14 +50,17 @@ document.addEventListener('DOMContentLoaded', function() {
 	});
 });
 
+// shows and hide bopth chatbar and chat text
 let showChat = () => {
 	chatForm.style.display = "block";
+	chatBox.style.display = "block";
 	chatInput.focus();
 }
 
 let hideChat = () => {
 	chatForm.reset();
 	chatInput.blur();
+	chatBox.style.display = "none";
 	chatForm.style.display = "none";
 }
 
