@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 let showChat = () => {
-	chatForm.style.display = "flex";
+	chatForm.style.display = "block";
 	chatInput.focus();
 }
 
