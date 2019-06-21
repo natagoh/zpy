@@ -15,7 +15,7 @@ socket.on('addToChat',function(data) {
  	chatBox.innerHTML += '<div class="chatLine">' +
  	' <span class="chatUsername">' + "Natasha:" + '</span>' + '<div class="chatText">' + data + '</div>'
  	+ '</div>';
-    chatBox.scrollTop = chatText.scrollHeight;
+    chatBox.scrollTop = chatBox.scrollHeight;
               
 });
     
