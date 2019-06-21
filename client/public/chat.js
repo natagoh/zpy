@@ -1,3 +1,4 @@
+// card ratios: 2.5 x 3.5
 const socket = io();
 
 // adding new players
