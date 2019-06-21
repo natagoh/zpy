@@ -42,31 +42,36 @@ document.addEventListener('DOMContentLoaded', function() {
 	});
 });
 
+let showChat = () => {
+	chatForm.style.display = "block";
+	chatInput.focus();
+}
+
+let hideChat = () => {
+	chatForm.reset();
+	chatInput.blur();
+	chatForm.style.display = "none";
+}
 
 document.onkeydown = function(event) {
 	event = event || window.event;
-	if (chatForm.style.display == "none") {
-		// t key
-		if (event.keyCode === 84) {
-			// if user isn;t already typing, show the chat bart
-			// don't let the 't' how up in chat
-			event.preventDefault();
-			chatForm.style.display = "block";
-			chatInput.value = '';
-			chatInput.focus();
-		}
-		// slash key (/) for secret commands ;)))
-		else if (event.keyCode === 191) {
-			chatForm.style.display = "block";
-			chatInput.focus();
-		}
+	var chatVisible = Boolean(chatForm.style.display != "none");
+	// t key
+	if (event.keyCode === 84 && !chatVisible) {
+		// if user isn;t already typing, show the chat bart
+		// don't let the 't' how up in chat
+		event.preventDefault();
+		showChat();
+		
+	}
+	// slash key (/) for secret commands ;)))
+	else if (event.keyCode === 191 && !chatVisible) {
+		showChat();
 	}
 
 	// esc key 
-	else if (event.keyCode === 27 && chatForm.style.display != "none") {
-		chatForm.style.display = "none";
-		// leave focus
-		chatInput.blur();
+	else if (event.keyCode === 27 && chatVisible) {
+		hideChat();
 	}
 	
 }
