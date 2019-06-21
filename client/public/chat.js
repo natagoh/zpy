@@ -10,10 +10,15 @@ var chatInput = document.getElementById('chat-input');
 var chatForm = document.getElementById('chat-form');
 
 //add a chat cell to our chat list view, and scroll to the bottom
-socket.on('addToChat',function(data) {           
-	console.log('got a chat message:', data);
+socket.on('addToChat',function(data) {   
+	var msg = data.msg;
+	var username = String(data.name);
+
+	
+	var chatUsername = "[" + username + "]";
+	console.log('got a chat message:', msg, " and username: ", chatUsername);
  	chatBox.innerHTML += '<div class="chatLine">' +
- 	' <span class="chatUsername">' + "Natasha:" + '</span>' + '<div class="chatText">' + data + '</div>'
+ 	' <span class="chatUsername">' + String(chatUsername) + '</span>' + '<div class="chatText">' + msg + '</div>'
  	+ '</div>';
     chatBox.scrollTop = chatBox.scrollHeight;
               

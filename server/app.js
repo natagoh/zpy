@@ -50,19 +50,18 @@ io.on('connection', (socket) => {
 
 	// new player joining
 	socket.on('newPlayer', () => {
+		console.log('a PLAYER connected:', socket.id);
 		gameState.players[socket.id] = {
-			x: 250, 
-			y: 250,
-			width: 25,
-			height: 25
+			name: "player" + socket.id
 		}
 	})
 
 	// send chat message to server
-    socket.on('sendMsgToServer',function(data) {
+    socket.on('sendMsgToServer',function(text) {
         console.log('someone sent a message!');
         for (var i in SOCKET_LIST) {
-        	SOCKET_LIST[i].emit('addToChat', data);
+        	// todo: username for
+        	SOCKET_LIST[i].emit('addToChat', {msg: text, name: "player" + socket.id});
         }
     });
 });
