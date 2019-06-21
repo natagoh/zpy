@@ -9,13 +9,16 @@ var chatBox = document.getElementById('chat-box');
 var chatInput = document.getElementById('chat-input');
 var chatForm = document.getElementById('chat-form');
 
+// html encodings
+const htmlEncodings = {
+	'<': '&lt;',
+	'>': '&gt'
+}
 //add a chat cell to our chat list view, and scroll to the bottom
 socket.on('addToChat',function(data) {   
 	var msg = data.msg;
-	var username = String(data.name);
-
-	
-	var chatUsername = "[" + username + "]";
+	var username = data.name;
+	var chatUsername = htmlEncodings["<"] + username + htmlEncodings[">"];
 	console.log('got a chat message:', msg, " and username: ", chatUsername);
  	chatBox.innerHTML += '<div class="chatLine">' +
  	' <span class="chatUsername">' + String(chatUsername) + '</span>' + '<div class="chatText">' + msg + '</div>'

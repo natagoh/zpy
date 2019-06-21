@@ -61,7 +61,7 @@ io.on('connection', (socket) => {
         console.log('someone sent a message!');
         for (var i in SOCKET_LIST) {
         	// todo: username for
-        	SOCKET_LIST[i].emit('addToChat', {msg: text, name: "player" + socket.id});
+        	SOCKET_LIST[i].emit('addToChat', {msg: text, name: "player-" + String(socket.id).substring(0, 4)});
         }
     });
 });
