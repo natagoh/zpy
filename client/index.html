@@ -3,21 +3,28 @@
   <head>
     <meta charset='utf-8'>
     <meta name='viewport' content='width=device-width initial-scale=1.0'>
-    <title></title>
+    <title>zpy ;))</title>
     <link rel="stylesheet" href="/style.css" />
-    <script defer src="/bundle.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
-    <style>
-        * { padding: 0; margin: 0; }
-      </style>
   </head>
+
   <body>
+    <!-- chat -->
     <div id="chat-box"></div>
     <form id="chat-form">
       <input id="chat-input" type="text" autocomplete="off">
       <input id="chat-btn" type="submit" value="Send"></input>
     </form>
+
+    <!-- game -->
+    <div id="app"></div>
   </body>
 
+  <!-- includes -->
+  <script defer src="/bundle.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <!-- scripts -->
   <script src="chat.js"></script>
+  <script src="AppMain.js"></script>
 </html>

@@ -57,13 +57,17 @@ io.on('connection', (socket) => {
 	})
 
 	// send chat message to server
-    socket.on('sendMsgToServer',function(text) {
+    socket.on('sendMsgToServer', function(text) {
         console.log('someone sent a message!');
-        for (var i in SOCKET_LIST) {
-        	// todo: username for
-        	SOCKET_LIST[i].emit('addToChat', {msg: text, name: "player-" + String(socket.id).substring(0, 4)});
-        }
+        // send to all sockets
+        io.sockets.emit('addToChat', {msg: text, name: "player-" + String(socket.id).substring(0, 4)});
+        // for (var i in SOCKET_LIST) {
+        // 	// todo: username for
+        // 	SOCKET_LIST[i].emit('addToChat', {msg: text, name: "player-" + String(socket.id).substring(0, 4)});
+        // }
     });
+
+    //todo: player changes name
 });
 
 setInterval(() => {
