@@ -2,7 +2,7 @@
   <div id="app">
     <!-- your hand -->
     <div class="hand">
-      <Card v-for="card in cards" :value="card.value" :suit="card.suit"/>
+      <Card v-for="(card, index) in cards" :value="card.value" :suit="card.suit" :index="index" :key="card.id"/>
     </div>
   </div>
 </template>
@@ -16,6 +16,7 @@ export default {
   data: function() {
     return  {
       cards: [
+        { value: "ace", suit: "clubs" },
         { value: "ace", suit: "clubs" },
         { value: "ace", suit: "clubs" },
       ]

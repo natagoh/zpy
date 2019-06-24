@@ -1,8 +1,7 @@
 <template>
-  <div class="card">
+  <div :class="[{shiftCard: isFirst()}, 'card']">
   	<img class="card-img" :src="getImg(value, suit)"> 
   	<!-- <img class="card-img" src="../../static/ace_clubs.svg">  -->
-  	{{ value }}
   </div>
 </template>
 
@@ -11,16 +10,25 @@ export default {
   name: 'Card', 
   props: {
     value: String,
-    suit: String
+    suit: String,
+    index: Number
   },
-
   methods: {
 		getImg(value, suit) {
   		var images = require.context('../assets', false, /\.svg$/)
       // return images('./' + pet + ".png")
-  		return images('./' + this.value + "_" + this.suit + ".svg");
-  	}
-  }
+  		return images('./' + value + "_" + suit + ".svg");
+  	},
+    isFirst: function () {
+      return Boolean(this.index === 1);
+    }
+    // getSpacing(index) {
+    //   return 50 * index + 'px';
+    // }
+  },
+  // mounted: function () {
+  //   document.querySelector('.card').style.left = 50 * this.index + 'px';
+  // }
 }   
 </script>
 
@@ -28,7 +36,12 @@ export default {
 .card {
 	display: block;
 	float: left;
-  	/*color: red;
-  	font-size: 2em;*/
+  width: 7em;
+  
+  /*position: absolute;*/
+}
+
+.shiftCard {
+  margin-left: -5em;
 }
 </style>
