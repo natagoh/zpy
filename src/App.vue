@@ -19,6 +19,9 @@ export default {
         { value: "ace", suit: "clubs" },
         { value: "ace", suit: "clubs" },
         { value: "ace", suit: "clubs" },
+        { value: "ace", suit: "clubs" },
+        { value: "ace", suit: "clubs" },
+        { value: "ace", suit: "clubs" },
       ]
     }
   },

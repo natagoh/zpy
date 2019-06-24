@@ -1,5 +1,5 @@
 <template>
-  <div :class="[{shiftCard: isFirst()}, 'card']">
+  <div :class="[{shiftCard: !isFirst()}, 'card']">
   	<img class="card-img" :src="getImg(value, suit)"> 
   	<!-- <img class="card-img" src="../../static/ace_clubs.svg">  -->
   </div>
@@ -19,8 +19,10 @@ export default {
       // return images('./' + pet + ".png")
   		return images('./' + value + "_" + suit + ".svg");
   	},
+
+    // checks if this is the first card in the hand
     isFirst: function () {
-      return Boolean(this.index === 1);
+      return Boolean(this.index === 0);
     }
     // getSpacing(index) {
     //   return 50 * index + 'px';
