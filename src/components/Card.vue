@@ -1,5 +1,8 @@
 <template>
-  <div :class="[{shiftCard: !isFirst()}, 'card']">
+  <div 
+    @mouseover="mouseOver"
+    :class="[{shiftCard: !isFirst(), active: hover}, 'card']"
+  >
   	<img class="card-img" :src="getImg(value, suit)"> 
   	<!-- <img class="card-img" src="../../static/ace_clubs.svg">  -->
   </div>
@@ -13,6 +16,13 @@ export default {
     suit: String,
     index: Number
   },
+  data: {
+    function() {
+      return {
+        hover: false
+      }
+    }
+  },
   methods: {
 		getImg(value, suit) {
   		var images = require.context('../assets', false, /\.svg$/)
@@ -23,6 +33,11 @@ export default {
     // checks if this is the first card in the hand
     isFirst: function () {
       return Boolean(this.index === 0);
+    },
+
+    mouseOver: function() {
+      this.hover = !this.hover;
+      console.log("moused over!");
     }
     // getSpacing(index) {
     //   return 50 * index + 'px';
@@ -39,11 +54,18 @@ export default {
 	display: block;
 	float: left;
   width: 7em;
-  
+
   /*position: absolute;*/
 }
 
 .shiftCard {
   margin-left: -5em;
+}
+
+/* when hover over card */
+.active {
+  border: blue;
+  z-index: 3;
+  width: 10em;
 }
 </style>
