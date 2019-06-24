@@ -1,13 +1,9 @@
 <template>
   <div id="app">
-    <!-- <img src="./assets/ace_clubs.svg"> -->
-    <Card value="ace" suit="clubs"/>
-
     <!-- your hand -->
-    <!-- <div class="hand" v-for="card in cards">
-      <p> hi </p>
-      <img src="./assets/ace_clubs.svg">
-    </div> -->
+    <div class="hand">
+      <Card v-for="card in cards" :value="card.value" :suit="card.suit"/>
+    </div>
   </div>
 </template>
 
@@ -19,7 +15,10 @@ export default {
   name: 'app',
   data: function() {
     return  {
-      cards: ["HI", "JI"]
+      cards: [
+        { value: "ace", suit: "clubs" },
+        { value: "ace", suit: "clubs" },
+      ]
     }
   },
 

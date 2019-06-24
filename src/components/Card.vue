@@ -13,23 +13,15 @@ export default {
     value: String,
     suit: String
   },
-  // computed: {
-  //   url: function() {
-  //     return "../../static/" + this.value + "_" + this.suit + ".svg";
-  //   }
-  // },
+
   methods: {
 		getImg(value, suit) {
-		var images = require.context('../assets', false, /\.svg$/)
-    // return images('./' + pet + ".png")
-		return images('./' + this.value + "_" + this.suit + ".svg");
-	}
-}
-  // mounted: function () {
-  // 	this.url = "../static/" + this.value + "_" + this.suit + ".svg";
-  //   console.log('card value is: ' + src);
-  // }
-}
+  		var images = require.context('../assets', false, /\.svg$/)
+      // return images('./' + pet + ".png")
+  		return images('./' + this.value + "_" + this.suit + ".svg");
+  	}
+  }
+}   
 </script>
 
 <style scoped>
