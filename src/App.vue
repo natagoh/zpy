@@ -2,42 +2,115 @@
   <div id="app">
     <!-- your hand -->
 
-    <div id="hand">
-      <draggable v-model="hand" group="cards" @start="drag=true" @end="drag=false">
-        <!-- <div v-for="element in myArray" :key="element.id">{{element.name}}</div> -->
-        <Card v-for="(card, index) in hand" :value="card.value" :suit="card.suit" :index="index" :key="card.id"/>
-      </draggable>
-    </div>
+    <Container 
+      id="hand"
+      @drop-ready="dropReady"
+      orientation="horizontal"
+      @drop="onDrop"
+      drag-class="dragging"
+    >
+      <!-- <Draggable v-model="hand" group="cards" @start="drag=true" @end="drag=false"> -->
+      <Draggable v-for="(card, index) in hand" :key="card.id">
+        <Card :value="card.value" :suit="card.suit" :index="index"/>
+      </Draggable>
+    </Container>
 
-    <div id="kitty">
-      <draggable v-model="kitty" group="cards" @start="drag=true" @end="drag=false">
+    <Container @drop="onDrop" id="kitty">
+      <Draggable v-model="kitty" group="cards" @start="drag=true" @end="drag=false">
         <!-- <div v-for="element in myArray" :key="element.id">{{element.name}}</div> -->
         <Card v-for="(card, index) in kitty" :value="card.value" :suit="card.suit" :index="index" :key="card.id"/>
-      </draggable>
-    </div>
+      </Draggable>
+    </Container>
+
+     
     <!-- <div class="hand">
       <Card v-for="(card, index) in cards" :value="card.value" :suit="card.suit" :index="index" :key="card.id"/>
     </div> -->
   </div>
 </template>
 
+
+<!-- <template>
+  <div>
+    <div class="simple-page">
+        <Container @drop="onDrop">            
+          <Draggable v-for="item in items" :key="item.id">
+            <div class="draggable-item">
+              {{item.data}}
+            </div>
+          </Draggable>
+        </Container>
+    </div>
+  </div>
+</template>
+
+<script>
+import { Container, Draggable } from "vue-smooth-dnd";
+import { applyDrag, generateItems } from "./utils";
+export default {
+  name: "Simple",
+  components: { Container, Draggable },
+  data() {
+    return {
+      items: generateItems(50, i => ({ id: i, data: "Draggable " + i }))
+    };
+  },
+  methods: {  
+    onDrop(dropResult) {
+      this.items = applyDrag(this.items, dropResult);
+    }
+  }
+};
+</script> -->
+
+
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
 import Card from './components/Card.vue'
-import draggable from 'vuedraggable'
+// import draggable from 'vuedraggable'
+import { Container, Draggable } from "vue-smooth-dnd";
+// import { applyDrag, generateItems } from "./utils";
+
+
+const applyDrag = (arr, dragResult) => {
+  const { removedIndex, addedIndex, payload } = dragResult;
+  if (removedIndex === null && addedIndex === null) return arr;
+
+  const result = [...arr];
+  let itemToAdd = payload;
+
+  if (removedIndex !== null) {
+    itemToAdd = result.splice(removedIndex, 1)[0];
+  }
+
+  if (addedIndex !== null) {
+    result.splice(addedIndex, 0, itemToAdd);
+  }
+
+  return result;
+};
+
+export const generateItems = (count, creator) => {
+  const result = [];
+  for (let i = 0; i < count; i++) {
+    result.push(creator(i));
+  }
+  return result;
+};
 
 export default {
   name: 'app',
   data: function() {
     return  {
-      hand: [
-        { value: "ace", suit: "clubs" },
-        { value: "ace", suit: "clubs" },
-        { value: "king", suit: "hearts" },
-        { value: "ace", suit: "clubs" },
-        { value: "4", suit: "spades" },
-        { value: "jack", suit: "diamonds" },
-      ],
+      // hand: [
+      //   { value: "ace", suit: "clubs" },
+      //   { value: "ace", suit: "clubs" },
+      //   { value: "king", suit: "hearts" },
+      //   { value: "ace", suit: "clubs" },
+      //   { value: "4", suit: "spades" },
+      //   { value: "jack", suit: "diamonds" },
+      // 
+      hand: generateItems(10, i => ({ id: i, value: "king", suit: "hearts" })),
       kitty: [
         { value: "ace", suit: "clubs" },
         { value: "ace", suit: "clubs" },
@@ -51,7 +124,18 @@ export default {
 
   components: {
     Card,
-    draggable
+    // draggable
+    Container, 
+    Draggable
+  },
+
+   methods: {  
+    onDrop(dropResult) {
+      this.hand = applyDrag(this.hand, dropResult);
+    },
+    dropReady() {
+      // console.log(arguments);
+    },
   },
   
   // created: function () {
@@ -85,7 +169,7 @@ export default {
 
 #hand {
   position: absolute;
-  bottom: 0;
+  top: 0;
 }
 
 #kitty {
@@ -114,5 +198,9 @@ export default {
 
 #kitty draggable {
   margin: auto;
+}
+
+.dragging {
+  background-color: yellow;
 }
 </style>

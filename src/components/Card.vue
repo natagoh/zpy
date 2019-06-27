@@ -5,7 +5,7 @@
     @click="onClick"
     :class="[{shiftCard: !isFirst}, {active: hover}, {click: clicked}, 'card']"
   >
-  	<img class="card-img" :src="getImg(value, suit)"> 
+  	<img draggable="false" class="card-img" :src="getImg(value, suit)"> 
  <!--    {{ String(hover)  }}
     <p>clicked {{ String(numClicks) }} times</p> -->
   </div>
@@ -69,6 +69,8 @@ export default {
       // }
       // console.log("on click!", this.index, this.hover)
     },
+
+    
     // calculateClass: function() {
     //   var isFirst = Boolean(this.index === 0);
     //   var classList = [
@@ -118,6 +120,10 @@ export default {
   margin-left: 0;
 }
 
+/* prevent image from interfering with draggable */
+.card-img { 
+  pointer-events: none;
+}
 
 /* when hover over card */
 /*.active {
