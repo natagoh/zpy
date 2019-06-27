@@ -6,8 +6,10 @@
       id="hand"
       @drop-ready="dropReady"
       orientation="horizontal"
-      @drop="onDrop"
+      :get-child-payload="getHandPayload"
+      @drop="onDrop('hand', $event)"
       drag-class="dragging"
+      group-name="cards"
     >
       <!-- <Draggable v-model="hand" group="cards" @start="drag=true" @end="drag=false"> -->
       <Draggable v-for="(card, index) in hand" :key="card.id">
@@ -15,10 +17,18 @@
       </Draggable>
     </Container>
 
-    <Container @drop="onDrop" id="kitty">
-      <Draggable v-model="kitty" group="cards" @start="drag=true" @end="drag=false">
-        <!-- <div v-for="element in myArray" :key="element.id">{{element.name}}</div> -->
-        <Card v-for="(card, index) in kitty" :value="card.value" :suit="card.suit" :index="index" :key="card.id"/>
+    <Container 
+      id="kitty"
+      @drop-ready="dropReady"
+      orientation="horizontal"
+      :get-child-payload="getKittyPayload"
+      @drop="onDrop('kitty', $event)"
+      drag-class="dragging"
+      group-name="cards"
+    >
+      <Draggable v-for="(card, index) in kitty" :key="card.id">
+        <!-- <Card v-for="(card, index) in kitty" :value="card.value" :suit="card.suit" :index="index" :key="card.id"/> -->
+        <Card :value="card.value" :suit="card.suit" :index="index"/>
       </Draggable>
     </Container>
 
@@ -92,7 +102,7 @@ const applyDrag = (arr, dragResult) => {
 
 export const generateItems = (count, creator) => {
   const result = [];
-  for (let i = 0; i < count; i++) {
+  for (var i = 0; i < count; i++) {
     result.push(creator(i));
   }
   return result;
@@ -109,16 +119,17 @@ export default {
       //   { value: "ace", suit: "clubs" },
       //   { value: "4", suit: "spades" },
       //   { value: "jack", suit: "diamonds" },
-      // 
-      hand: generateItems(10, i => ({ id: i, value: "king", suit: "hearts" })),
-      kitty: [
-        { value: "ace", suit: "clubs" },
-        { value: "ace", suit: "clubs" },
-        { value: "king", suit: "hearts" },
-        { value: "ace", suit: "clubs" },
-        { value: "2", suit: "spades" },
-        { value: "jack", suit: "diamonds" },
-      ]
+      // ],
+      hand: generateItems(25, i => ({ id: i, value: "king", suit: "hearts" })),
+      kitty: generateItems(8, i => ({ id: i, value: "king", suit: "clubs" }))
+      // kitty: [
+      //   { value: "ace", suit: "clubs" },
+      //   { value: "ace", suit: "clubs" },
+      //   { value: "king", suit: "hearts" },
+      //   { value: "ace", suit: "clubs" },
+      //   { value: "2", suit: "spades" },
+      //   { value: "jack", suit: "diamonds" },
+      // ]
     }
   },
 
@@ -130,11 +141,24 @@ export default {
   },
 
    methods: {  
-    onDrop(dropResult) {
-      this.hand = applyDrag(this.hand, dropResult);
+    // onDropHand(dropResult) {
+    //   this.hand = applyDrag(this.hand, dropResult);
+    // },
+    // onDropKitty(dropResult) {
+    //   this.kitty = applyDrag(this.kitty, dropResult);
+    // },
+
+    onDrop: function(collection, dropResult) {
+      this[collection] = applyDrag(this[collection], dropResult)
     },
-    dropReady() {
+    dropReady: function() {
       // console.log(arguments);
+    },
+    getHandPayload: function(index) {
+      return this.hand[index];
+    },
+    getKittyPayload: function(index) {
+      return this.kitty[index];
     },
   },
   
@@ -202,5 +226,9 @@ export default {
 
 .dragging {
   background-color: yellow;
+  border: blue;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 0.45em;
 }
 </style>

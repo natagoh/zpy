@@ -3,9 +3,9 @@
     @mouseover="isHovering(true)"
     @mouseout="isHovering(false)"
     @click="onClick"
-    :class="[{shiftCard: !isFirst}, {active: hover}, {click: clicked}, 'card']"
+    :class="[{shiftCard: !isFirst}, {active: hover}, {cardlicked: clicked}, 'card']"
   >
-  	<img draggable="false" class="card-img" :src="getImg(value, suit)"> 
+  	<img class="card-img" :src="getImg(value, suit)"> 
  <!--    {{ String(hover)  }}
     <p>clicked {{ String(numClicks) }} times</p> -->
   </div>
@@ -27,12 +27,6 @@ export default {
       clicked: false,
     }
   },
-  // watch: {
-  //   numClicks: function (newVal) {
-  //     this.clicked = true;
-  //      // console.log('Change to numCLicks', newVal)
-  //   }
-  // },
   
   computed: {
     isFirst: function() {
@@ -47,11 +41,6 @@ export default {
   		return images('./' + suit + "_" + value + ".svg");
   	},
 
-    // checks if this is the first card in the hand
-    // isFirst: function () {
-    //   return Boolean(this.index === 0);
-    // },
-
     isHovering: function(isHover) {
       this.hover = isHover;
       if (!isHover) {
@@ -62,30 +51,9 @@ export default {
     onClick: function(event) {
       this.numClicks += 1;
       this.clicked = !this.clicked;
-      // if (this.click === "hi there") {
-      //   this.click = "waut"
-      // } else {
-      //   this.click = "hi there"
-      // }
-      // console.log("on click!", this.index, this.hover)
     },
 
-    
-    // calculateClass: function() {
-    //   var isFirst = Boolean(this.index === 0);
-    //   var classList = [
-    //     'card',
-    //     isFirst ? "shiftCard" : "normalCard"
-    //   ]
-    //   return classList
-    // }
   },
-
-
-
-  // mounted: function () {
-  //   document.querySelector('.card').style.left = 50 * this.index + 'px';
-  // }
 }   
 </script>
 
@@ -98,6 +66,7 @@ export default {
   border-width: 1px;
   border-style: solid;
   border-radius: 0.45em;
+  margin-left: auto;
   /*z-index: 2;*/
   /*position: relative;*/
 }
@@ -109,16 +78,16 @@ export default {
     right: 0;
     bottom: 0;
     left: 0;
-    background: rgba(255, 255, 255, .3);
-}
-*/
+    background: rgba(255, 255, 0, .9);
+}*/
+
 .shiftCard {
   margin-left: -5em;
 }
 
-.normalCard {
+/*.normalCard {
   margin-left: 0;
-}
+}*/
 
 /* prevent image from interfering with draggable */
 .card-img { 
@@ -131,8 +100,10 @@ export default {
   width: 8em;
   z-index: 3;
 }*/
+
+
 /* make card float to top on click*/
-/*.click {
+/*.cardClicked {
   position: relative;
 }*/
 </style>
