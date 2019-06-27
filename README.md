@@ -6,6 +6,7 @@ npm install express --save
 npm install --save socket.io
 npm install
 npm install -g @vue/cli
+npm install vue-smooth-dnd
 ```
 
 ### Compiles and hot-reloads for development

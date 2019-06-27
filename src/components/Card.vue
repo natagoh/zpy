@@ -89,26 +89,42 @@ export default {
 
 <style scoped>
 .card {
-	display: block;
+	display: flex;
 	float: left;
   width: 7em;
-  z-index: 2;
+  border: gray;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 0.45em;
+  /*z-index: 2;*/
   /*position: relative;*/
 }
-
-/*.shiftCard {
+/*.card:before {
+    content: "";
+    display: flex;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(255, 255, 255, .3);
+}
+*/
+.shiftCard {
   margin-left: -5em;
-}*/
+}
 
 .normalCard {
   margin-left: 0;
 }
+
+
 /* when hover over card */
-.active {
+/*.active {
   color: white;
   width: 8em;
   z-index: 3;
-}
+}*/
 /* make card float to top on click*/
 /*.click {
   position: relative;
