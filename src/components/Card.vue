@@ -1,10 +1,13 @@
 <template>
   <div 
-    @mouseover="mouseOver"
-    :class="[{shiftCard: !isFirst(), active: hover}, 'card']"
+    @mouseover="isHovering(true)"
+    @mouseout="isHovering(false)"
+    @click="onClick"
+    :class="[{shiftCard: !isFirst}, {active: hover}, numClicks, 'card']"
   >
   	<img class="card-img" :src="getImg(value, suit)"> 
-  	<!-- <img class="card-img" src="../../static/ace_clubs.svg">  -->
+    {{ String(hover)  }}
+    <p>clicked {{ String(numClicks) }} times</p>
   </div>
 </template>
 
@@ -16,36 +19,34 @@ export default {
     suit: String,
     index: Number
   },
-  data: {
-    function() {
-      return {
-        hover: false
-      }
+  data: function() {
+    return { 
+      hover: false,
+      numClicks: 0,
     }
   },
+  
+  computed: {
+    isFirst: function() {
+      return Boolean(this.index === 0);
+    }
+
+  },
   methods: {
-		getImg(value, suit) {
+		getImg: function(value, suit) {
   		var images = require.context('../assets', false, /\.svg$/)
       // return images('./' + pet + ".png")
   		return images('./' + value + "_" + suit + ".svg");
   	},
 
-    // checks if this is the first card in the hand
-    isFirst: function () {
-      return Boolean(this.index === 0);
+    isHovering: function(isHover) {
+      this.hover = isHover;
     },
 
-    mouseOver: function() {
-      this.hover = !this.hover;
-      console.log("moused over!");
-    }
-    // getSpacing(index) {
-    //   return 50 * index + 'px';
-    // }
+    onClick: function(event) {
+      this.numClicks += 1;
+    },
   },
-  // mounted: function () {
-  //   document.querySelector('.card').style.left = 50 * this.index + 'px';
-  // }
 }   
 </script>
 
@@ -54,18 +55,25 @@ export default {
 	display: block;
 	float: left;
   width: 7em;
-
-  /*position: absolute;*/
+  z-index: 2;
+  /*position: relative;*/
 }
 
 .shiftCard {
   margin-left: -5em;
 }
 
+.normalCard {
+  margin-left: 0;
+}
 /* when hover over card */
 .active {
-  border: blue;
+  color: white;
+  width: 8em;
   z-index: 3;
-  width: 10em;
+}
+/* make card float to top on click*/
+.click {
+  position: relative;
 }
 </style>
