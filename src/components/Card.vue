@@ -65,7 +65,7 @@ export default {
   border: gray;
   border-width: 1px;
   border-style: solid;
-  border-radius: 0.45em;
+  border-radius: 0.42em;
   margin-left: auto;
   /*z-index: 2;*/
   /*position: relative;*/

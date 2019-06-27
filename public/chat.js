@@ -68,6 +68,7 @@ let hideChat = () => {
 document.onkeydown = function(event) {
 	event = event || window.event;
 	var chatVisible = Boolean(chatForm.style.display != "none");
+	
 	// t key
 	if (event.keyCode === 84 && !chatVisible) {
 		// if user isn;t already typing, show the chat bart

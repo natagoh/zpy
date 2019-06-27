@@ -21,6 +21,8 @@ body {
     bottom: 130px;
 
     z-index: 2;
+
+    display: none;
 }
  
 .chatLine {
@@ -46,6 +48,8 @@ body {
     position: absolute;
     bottom: 0;
     z-index: 2;
+
+    display: none;
 }
 
 #chat-input {

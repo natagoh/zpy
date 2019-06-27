@@ -29,5 +29,11 @@ npm run test
 npm run lint
 ```
 
+### Run ZPY
+```
+npm run build
+node server/app.js
+```
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
