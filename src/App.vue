@@ -1,15 +1,20 @@
 <template>
   <div id="app">
     <!-- your hand -->
-    <div class="hand">
+    <draggable class="hand" v-model="cards" group="people" @start="drag=true" @end="drag=false">
+      <!-- <div v-for="element in myArray" :key="element.id">{{element.name}}</div> -->
       <Card v-for="(card, index) in cards" :value="card.value" :suit="card.suit" :index="index" :key="card.id"/>
-    </div>
+    </draggable>
+    <!-- <div class="hand">
+      <Card v-for="(card, index) in cards" :value="card.value" :suit="card.suit" :index="index" :key="card.id"/>
+    </div> -->
   </div>
 </template>
 
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
 import Card from './components/Card.vue'
+import draggable from 'vuedraggable'
 
 export default {
   name: 'app',
@@ -27,7 +32,8 @@ export default {
   },
 
   components: {
-    Card
+    Card,
+    draggable
   },
   
   // created: function () {

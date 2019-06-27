@@ -13,7 +13,8 @@
     "morgan": "^1.9.1",
     "server": "^1.0.19",
     "socket.io": "^2.2.0",
-    "vue": "^2.6.10"
+    "vue": "^2.6.10",
+    "vuedraggable": "^2.23.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.8.0",

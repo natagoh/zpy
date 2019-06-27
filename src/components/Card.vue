@@ -12,6 +12,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'Card', 
   props: {
@@ -109,7 +110,7 @@ export default {
   z-index: 3;
 }
 /* make card float to top on click*/
-.click {
+/*.click {
   position: relative;
-}
+}*/
 </style>
