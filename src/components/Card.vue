@@ -42,9 +42,9 @@ export default {
   },
   methods: {
 		getImg: function(value, suit) {
-  		var images = require.context('../assets', false, /\.svg$/)
+  		var images = require.context('../assets/cards', false, /\.svg$/)
       // return images('./' + pet + ".png")
-  		return images('./' + value + "_" + suit + ".svg");
+  		return images('./' + suit + "_" + value + ".svg");
   	},
 
     // checks if this is the first card in the hand
@@ -96,9 +96,9 @@ export default {
   /*position: relative;*/
 }
 
-.shiftCard {
+/*.shiftCard {
   margin-left: -5em;
-}
+}*/
 
 .normalCard {
   margin-left: 0;

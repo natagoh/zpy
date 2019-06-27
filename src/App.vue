@@ -23,7 +23,7 @@ export default {
       cards: [
         { value: "ace", suit: "clubs" },
         { value: "ace", suit: "clubs" },
-        { value: "ace", suit: "clubs" },
+        { value: "king", suit: "hearts" },
         { value: "ace", suit: "clubs" },
         { value: "ace", suit: "clubs" },
         { value: "ace", suit: "clubs" },
