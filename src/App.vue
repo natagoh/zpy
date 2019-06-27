@@ -102,7 +102,7 @@ const applyDrag = (arr, dragResult) => {
 
 export const generateItems = (count, creator) => {
   const result = [];
-  for (var i = 0; i < count; i++) {
+  for (let i = 0; i < count; i++) {
     result.push(creator(i));
   }
   return result;
@@ -120,8 +120,8 @@ export default {
       //   { value: "4", suit: "spades" },
       //   { value: "jack", suit: "diamonds" },
       // ],
-      hand: generateItems(25, i => ({ id: i, value: "king", suit: "hearts" })),
-      kitty: generateItems(8, i => ({ id: i, value: "king", suit: "clubs" }))
+      hand: generateItems(25, i => ({ id: 'h' + i, value: "king", suit: "hearts" })),
+      kitty: generateItems(8, i => ({ id: 'k' + i, value: "king", suit: "clubs" }))
       // kitty: [
       //   { value: "ace", suit: "clubs" },
       //   { value: "ace", suit: "clubs" },
