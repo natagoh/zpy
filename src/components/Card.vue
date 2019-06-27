@@ -3,11 +3,11 @@
     @mouseover="isHovering(true)"
     @mouseout="isHovering(false)"
     @click="onClick"
-    :class="[{shiftCard: !isFirst}, {active: hover}, numClicks, 'card']"
+    :class="[{shiftCard: !isFirst}, {active: hover}, {click: clicked}, 'card']"
   >
   	<img class="card-img" :src="getImg(value, suit)"> 
-    {{ String(hover)  }}
-    <p>clicked {{ String(numClicks) }} times</p>
+ <!--    {{ String(hover)  }}
+    <p>clicked {{ String(numClicks) }} times</p> -->
   </div>
 </template>
 
@@ -23,8 +23,15 @@ export default {
     return { 
       hover: false,
       numClicks: 0,
+      clicked: false,
     }
   },
+  // watch: {
+  //   numClicks: function (newVal) {
+  //     this.clicked = true;
+  //      // console.log('Change to numCLicks', newVal)
+  //   }
+  // },
   
   computed: {
     isFirst: function() {
@@ -39,14 +46,43 @@ export default {
   		return images('./' + value + "_" + suit + ".svg");
   	},
 
+    // checks if this is the first card in the hand
+    // isFirst: function () {
+    //   return Boolean(this.index === 0);
+    // },
+
     isHovering: function(isHover) {
       this.hover = isHover;
+      if (!isHover) {
+        this.clicked = false;
+      }
     },
 
     onClick: function(event) {
       this.numClicks += 1;
+      this.clicked = !this.clicked;
+      // if (this.click === "hi there") {
+      //   this.click = "waut"
+      // } else {
+      //   this.click = "hi there"
+      // }
+      // console.log("on click!", this.index, this.hover)
     },
+    // calculateClass: function() {
+    //   var isFirst = Boolean(this.index === 0);
+    //   var classList = [
+    //     'card',
+    //     isFirst ? "shiftCard" : "normalCard"
+    //   ]
+    //   return classList
+    // }
   },
+
+
+
+  // mounted: function () {
+  //   document.querySelector('.card').style.left = 50 * this.index + 'px';
+  // }
 }   
 </script>
 
